@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import "./styles.css";
 
-function App() {
+export default function App() {
+
+  const [todos, setTodos] = React.useState([
+    { id: 1, text: "Wash dishes", done: false },
+    { id: 2, text: "Do laundry", done: false },
+    { id: 3, text: "Take shower", done: false }
+  ])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>To Do List  </h1>
+      <TodoList todos={todos} /> 
+      <AddToDo setTodos={setTodos}/>
     </div>
+  ); // Passing todos array as todos property 
+}
+function TodoList ({todos}){
+
+  return (
+
+  <ul>
+    {[todos.map( (todo => (
+      <li key ={todo.id}> {todo.text}</li>
+    )))]}
+  </ul>
+  )
+    };
+function AddToDo({setTodos}){
+  function handleAddTodo(event){
+    event.preventDefault();
+    console.log("AddToDo: ", event.target.elements.AddToDo.value)
+    const text = event.target.elements.AddToDo.value;
+    const todo = {
+      id: 4,
+      text,
+      done: false
+    };
+    console.log(todo);
+    setTodos(prevTodos => {
+      return prevTodos.concat(todo)
+    })
+  }  
+  
+  return(
+    <form onSubmit={handleAddTodo}>
+      <input name="AddToDo" placeholder="Add Item" />
+      <button type="submit">Submit</button> 
+    </form>
   );
+
 }
 
-export default App;
