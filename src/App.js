@@ -29,9 +29,10 @@ function TodoList({todos}) {
   )
 };
 function AddToDo({ setTodos }) {
+  const inputRef = React.useRef();
   function handleAddTodo(event) {
     event.preventDefault();
-    console.log("AddToDo: ", event.target.elements.AddToDo.value)
+    console.log("AddToDo: ", event.target.elements.AddToDo.value) // log what was submited 
     const text = event.target.elements.AddToDo.value;
     const todo = {
       id: 4,
@@ -42,11 +43,12 @@ function AddToDo({ setTodos }) {
     setTodos(prevTodos => {
       return prevTodos.concat(todo)
     })
+    inputRef.current.value = "";
   }
 
   return (
     <form onSubmit={handleAddTodo}>
-      <input name="AddToDo" placeholder="Add Item" />
+      <input name="AddToDo" placeholder="Add Item" ref={inputRef} />
       <button type="submit">Submit</button>
     </form>
   );
