@@ -2,7 +2,7 @@ import React from 'react';
 import "./styles.css";
 
 export default function App() {
-
+// test data
   const [todos, setTodos] = React.useState([
     { id: 1, text: "Wash dishes", done: false },
     { id: 2, text: "Do laundry", done: false },
@@ -12,24 +12,24 @@ export default function App() {
   return (
     <div className="App">
       <h1>To Do List  </h1>
-      <TodoList todos={todos} /> 
-      <AddToDo setTodos={setTodos}/>
+      <TodoList todos={todos} />
+      <AddToDo setTodos={setTodos} />
     </div>
   ); // Passing todos array as todos property 
 }
-function TodoList ({todos}){
+function TodoList({todos}) {
 
   return (
 
-  <ul>
-    {[todos.map( (todo => (
-      <li key ={todo.id}> {todo.text}</li>
-    )))]}
-  </ul>
+    <ul>
+      {[todos.map((todo => (
+        <li key={todo.id}> {todo.text}</li>
+      )))]}
+    </ul>
   )
-    };
-function AddToDo({setTodos}){
-  function handleAddTodo(event){
+};
+function AddToDo({ setTodos }) {
+  function handleAddTodo(event) {
     event.preventDefault();
     console.log("AddToDo: ", event.target.elements.AddToDo.value)
     const text = event.target.elements.AddToDo.value;
@@ -42,12 +42,12 @@ function AddToDo({setTodos}){
     setTodos(prevTodos => {
       return prevTodos.concat(todo)
     })
-  }  
-  
-  return(
+  }
+
+  return (
     <form onSubmit={handleAddTodo}>
       <input name="AddToDo" placeholder="Add Item" />
-      <button type="submit">Submit</button> 
+      <button type="submit">Submit</button>
     </form>
   );
 
